@@ -1,6 +1,5 @@
 stages:
   - test
-  - deploy
 
 cache:
   paths:
@@ -15,11 +14,3 @@ test:
     - composer install
     - sh cs_check
     - php artisan key:generate
-
-production:
-  stage: deploy
-  image: composer
-  script:
-    - ssh $USER@$HOST 'cd /var/www/vhosts/phphints.com/crud.phphints.com'
-  only:
-    - master
