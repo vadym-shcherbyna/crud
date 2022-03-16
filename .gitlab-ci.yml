@@ -18,6 +18,7 @@ test:
 
 production:
   stage: deploy
+  image: composer
   script:
     - ssh $USER@$HOST 'cd /var/www/vhosts/phphints.com/crud.phphints.com'
   only:
