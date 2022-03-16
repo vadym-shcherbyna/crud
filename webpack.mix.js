@@ -1,17 +1,19 @@
 const mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel applications. By default, we are compiling the CSS
- | file for the application as well as bundling up all the JS files.
- |
- */
+// JS
+mix.js('resources/js/app.js', 'public/js');
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+// CSS
+mix.sass('resources/sass/app.scss', 'public/css')
+mix.sass('resources/sass/auth/login.scss', 'public/css/auth')
+
+// RESOURCES
+mix.copy('resources/images', 'public/images')
+mix.copy('resources/images/logo.svg', 'public/favicon.svg')
+
+const config = {
+    //
+}
+
+mix.webpackConfig(config);
+

@@ -1,0 +1,17 @@
+stages:
+  - test
+
+cache:
+  paths:
+    - vendor/
+    - node_modules/
+
+test:
+  stage: test
+  image: composer
+  script:
+    - cp .env.example .env
+    - composer install
+    - sh cs_check
+    - php artisan key:generate
+    - vendor/bin/phpunit
