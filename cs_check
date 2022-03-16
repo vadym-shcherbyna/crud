@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+vendor/bin/phpcs . --ignore=vendor,public,storage,database/seeds,database/migrations,resources/views,bootstrap/cache,_ide_helper.php --extensions=php,inc --standard=PSR2
