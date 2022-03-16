@@ -37,7 +37,7 @@
 
             <button class="w-100 btn btn-lg btn-secondary" type="submit">@lang($route . '.fields.submit')</button>
 
-            <p class="mt-3 mb-3 text-muted">#19:06</p>
+            <p class="mt-3 mb-3 text-muted">#19:16</p>
 
         </form>
 
