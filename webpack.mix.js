@@ -5,7 +5,7 @@ mix.js('resources/js/app.js', 'public/js');
 
 // CSS
 mix.sass('resources/sass/app.scss', 'public/css')
-mix.sass('resources/sass/auth/login.scss', 'public/css/auth')
+mix.sass('resources/sass/user/login.scss', 'public/css/user')
 
 // RESOURCES
 mix.copy('resources/images', 'public/images')

@@ -1,5 +1,6 @@
 stages:
   - test
+  - deploy
 
 cache:
   paths:
@@ -14,3 +15,11 @@ test:
     - composer install
     - sh cs_check
     - php artisan key:generate
+
+production:
+  stage: deploy
+  image: registry.gitlab.com/Vadym.Shcherbyna/crud-laravel-vue
+  script:
+    - ssh $USER@$HOST 'cd /var/www/vhosts/phphints.com/crud.phphints.com;git pull;composer update --no-dev;/opt/plesk/php/8.0/bin/php artisan migrate;npm i;npm run production'
+  only:
+    - master
