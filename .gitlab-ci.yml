@@ -19,6 +19,14 @@ test:
 production:
   stage: deploy
   image: composer
+  before_script:
+    - apt-get update -qq
+    - apt-get install -qq git  
+    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - ssh $USER@$HOST 'cd /var/www/vhosts/phphints.com/crud.phphints.com;/opt/plesk/php/8.0/bin/php /var/www/vhosts/phphints.com/composer.phar update'
   only:
