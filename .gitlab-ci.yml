@@ -1,5 +1,6 @@
 stages:
   - test
+  - deploy
 
 cache:
   paths:
@@ -14,3 +15,14 @@ test:
     - composer install
     - sh cs_check
     - php artisan key:generate
+
+production:
+  stage: deploy
+  image: composer
+  before_script:
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  script:
+    - ssh -o StrictHostKeyChecking=no $USER@$HOST 'cd /var/www/vhosts/phphints.com/crud.phphints.com;git pull origin;/opt/plesk/php/8.0/bin/php /var/www/vhosts/phphints.com/composer.phar update;/opt/plesk/php/8.0/bin/php artisan migrate;npm i;npm run production'
+  only:
+    - master    
