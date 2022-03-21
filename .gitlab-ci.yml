@@ -18,7 +18,14 @@ test:
 
 production:
   stage: deploy
-  image: composer
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $VM_IPADDRESS >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
   script:
     - ssh $USER@$HOST 'cd /var/www/vhosts/phphints.com/crud.phphints.com;/opt/plesk/php/8.0/bin/php /var/www/vhosts/phphints.com/composer.phar update'
   only:
