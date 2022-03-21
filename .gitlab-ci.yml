@@ -18,15 +18,7 @@ test:
 
 production:
   stage: deploy
-  image: composer
-  before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts    
+  image: composer  
   script:
     - ssh -o StrictHostKeyChecking=no $USER@$HOST 'cd /var/www/vhosts/phphints.com/crud.phphints.com;/opt/plesk/php/8.0/bin/php /var/www/vhosts/phphints.com/composer.phar update'
   only:
