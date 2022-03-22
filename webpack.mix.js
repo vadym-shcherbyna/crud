@@ -6,6 +6,7 @@ mix.js('resources/js/app.js', 'public/js');
 // CSS
 mix.sass('resources/sass/app.scss', 'public/css')
 mix.sass('resources/sass/user/login.scss', 'public/css/user')
+mix.sass('resources/sass/admin/general.scss', 'public/css/admin')
 
 
 // RESOURCES
