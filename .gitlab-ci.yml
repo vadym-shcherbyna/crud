@@ -23,6 +23,6 @@ production:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh -o StrictHostKeyChecking=no $USER@$HOST 'cd /var/www/vhosts/phphints.com/crud.phphints.com;git pull origin;/opt/plesk/php/8.0/bin/php /var/www/vhosts/phphints.com/composer.phar update;/opt/plesk/php/8.0/bin/php artisan migrate;npm i;npm run production'
+    - ssh -o StrictHostKeyChecking=no $USER@$HOST 'cd /var/www/vhosts/phphints.com/crud.phphints.com;git pull;/opt/plesk/php/8.0/bin/php /var/www/vhosts/phphints.com/composer.phar update;/opt/plesk/php/8.0/bin/php artisan migrate;npm i;npm run production'
   only:
     - master    
