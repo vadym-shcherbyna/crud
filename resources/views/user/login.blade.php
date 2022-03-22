@@ -37,7 +37,7 @@
 
             <button class="w-100 btn btn-lg btn-secondary" type="submit">@lang($route . '.buttons.submit')</button>
 
-            <p class="mt-3 mb-3 text-muted">&copy; @lang($route . '.copyright')</p>
+            <p class="mt-3 mb-3 text-muted">v.1012 &copy; @lang($route . '.copyright')</p>
 
         </form>
 
