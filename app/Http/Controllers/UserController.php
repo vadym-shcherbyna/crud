@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\ViewController;
-use App\Http\Requests\User\AuthRequest;
+use App\Http\Requests\User\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 
@@ -14,7 +13,7 @@ class UserController extends ViewController
      *
      * @return mix
      */
-    public function login()
+    public function login() : \Illuminate\View\View|\Illuminate\Http\RedirectResponse
     {
         if (Auth::check()) {
             return redirect()->route('admin.dashboard');
@@ -24,26 +23,30 @@ class UserController extends ViewController
     }
 
     /**
-     * Logout View
+     * Login Handler
      *
-     * @return \Illuminate\Routing\Redirector
+     * @param LoginRequest $request
+     *
+     * @return Illuminate\Http\RedirectResponse
      */
-    public function auth(AuthRequest $request)
+    public function auth(LoginRequest $request) : \Illuminate\Http\RedirectResponse
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember_me)) {
+            //
             $request->session()->regenerate();
+
             return redirect()->intended(route('admin.dashboard'));
         }
 
-        return back()->withInput()->withErrors(['auth' => Lang::get('user.auth.error')]);
+        return back()->withInput()->withErrors(['login' => Lang::get('user.login.error')]);
     }
 
     /**
      * Logout
      *
-     * @return \Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function logout()
+    public function logout() : \Illuminate\Http\RedirectResponse
     {
         Auth::logout();
 

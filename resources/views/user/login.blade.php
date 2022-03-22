@@ -31,13 +31,13 @@
             <div class="checkbox mb-3">
                 <label class="cursor-pointer">
                     <input type="hidden" name="remember_me" value="0">
-                    <input type="checkbox" value="1" name="remember_me" checked> @lang($route . '.fields.remember_me.label')
+                    <input type="checkbox" name="remember_me" value="1" checked> @lang($route . '.fields.remember_me.label')
                 </label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-secondary" type="submit">@lang($route . '.fields.submit')</button>
+            <button class="w-100 btn btn-lg btn-secondary" type="submit">@lang($route . '.buttons.submit')</button>
 
-            <p class="mt-3 mb-3 text-muted">#17:48</p>
+            <p class="mt-3 mb-3 text-muted">&copy; @lang($route . '.copyright')</p>
 
         </form>
 
