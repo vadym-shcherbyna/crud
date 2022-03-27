@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\ViewController;
-
 class DashboardController extends ViewController
 {
     /**
