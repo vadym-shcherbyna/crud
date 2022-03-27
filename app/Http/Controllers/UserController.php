@@ -16,7 +16,7 @@ class UserController extends ViewController
     public function login() : \Illuminate\View\View|\Illuminate\Http\RedirectResponse
     {
         if (Auth::check()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.items.index');
         } else {
             return $this->view('user.login');
         }
@@ -35,7 +35,7 @@ class UserController extends ViewController
             //
             $request->session()->regenerate();
 
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended(route('admin.items.index'));
         }
 
         return back()->withInput()->withErrors(['login' => Lang::get('user.login.error')]);

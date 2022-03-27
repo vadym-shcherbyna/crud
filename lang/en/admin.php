@@ -12,6 +12,9 @@ return [
         'title' => 'Data Example',
         'H1' => 'Data Example',
         'menu' => 'Items',
+        'index' => [
+            'title' => 'Items Index',
+        ],
     ],
 
 ];
