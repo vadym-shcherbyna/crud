@@ -1,6 +1,8 @@
 # Laravel Vue CRUD
 
-CRUD with Laravel API Resource and Vue
+CRUD with Laravel API Resource and Vue.
+
+Filters, sorting, pagination and num rows control. Modals and tooltips. 
 
 ## Stack
 
@@ -8,9 +10,22 @@ CRUD with Laravel API Resource and Vue
 - Vue 3.x
 - Bootstrap 5.x
 - Bootstrap Icons
+- BootstrapVue3
 
-## Featured
+## Packages
 
-- Laravel API Resource 
-- Laravel Mix
+- laravel-mix
+- vue3-popper
+
+## Laravel App
+
+- Laravel API Resources
+- Repositories
+- Form Requests Validation
+- Migrations + Seeders
+- Models: SoftDeletes, Factory
+
+## Deploy
+
 - PHP_CodeSniffer
+- CI scripts
