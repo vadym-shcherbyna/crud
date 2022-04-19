@@ -20,5 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/* Items */
+Route::post('/items/{item}/activity', [ItemController::class, 'activity']);
 Route::resource('items', ItemController::class)->except(['show']);
+
 Route::resource('categories', CategoryController::class)->only(['index']);

@@ -98,8 +98,10 @@
                 </td>
                 <td>{{ item.address }}</td>
                 <td class="text-center">
-                    <i class="bi bi-check-square-fill text-secondary" v-if="item.is_active == 1"></i>
-                    <i class="bi bi-square text-secondary" v-if="item.is_active == 0"></i>
+                    <i class="bi bi-check-square-fill text-secondary cursor-pointer"
+                       v-if="item.is_active == 1" v-on:click="activityItem(item.id, 0)"></i>
+                    <i class="bi bi-square text-secondary cursor-pointer"
+                       v-if="item.is_active == 0" v-on:click="activityItem(item.id, 1)"></i>
                 </td>
                 <td class="text-center">
 
@@ -312,6 +314,15 @@ export default {
                         console.error(error);
                     });
             }
+        },
+        activityItem(id, value) {
+            axios.post('/api/items/' + id + '/activity', {is_active: value})
+                .then(response => {
+                    this.getItems();
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
         },
     }
 }

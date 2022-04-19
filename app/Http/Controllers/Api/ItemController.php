@@ -8,6 +8,7 @@ use App\Http\Resources\ItemResource;
 use App\Http\Requests\Api\Items\IndexRequest;
 use App\Http\Requests\Api\Items\StoreRequest;
 use App\Http\Requests\Api\Items\UpdateRequest;
+use App\Http\Requests\Api\Items\ActivityRequest;
 use App\Models\Item;
 
 class ItemController extends Controller
@@ -77,7 +78,7 @@ class ItemController extends Controller
      * @return Illuminate\Http\JsonResponse
      *
      */
-    public function update(StoreRequest $request, Item $item) : \Illuminate\Http\JsonResponse
+    public function update(UpdateRequest $request, Item $item) : \Illuminate\Http\JsonResponse
     {
         $validated = $request->validated();
 
@@ -95,5 +96,19 @@ class ItemController extends Controller
     public function destroy(Item $item)
     {
         $item->delete();
+    }
+
+    /*
+     * Items Activity
+     *
+     * @param ActivityRequest $request
+     * @param Item $item
+     * @return void
+     */
+    public function activity(ActivityRequest $request, Item $item)
+    {
+        $validated = $request->validated();
+
+        $this->repository->update($item, $validated);
     }
 }
