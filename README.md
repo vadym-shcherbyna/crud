@@ -10,13 +10,12 @@ Add, edit, delete items. Filters, sorting, pagination and num rows control. Moda
 - Vue 3.x
 - Bootstrap 5.x
 - Bootstrap Icons
-- BootstrapVue3
+- vue3-popper
 
 ## Packages
 
-- laravel-mix
-- vue3-popper
-- Sanctum
+- mix
+- sanctum
 
 ## Laravel App Futures
 
@@ -29,5 +28,26 @@ Add, edit, delete items. Filters, sorting, pagination and num rows control. Moda
 
 ## Deploy
 
-- PHP_CodeSniffer
-- CI scripts
+  ### Copy Repo
+
+  cd /var/www/vhosts/[your-path]
+
+  git clone https://gitlab.com/Vadym.Shcherbyna/crud-laravel-vue -b master
+
+  ### Set Credentials
+  
+  [edit .env]
+
+  ### Migration + Seeding
+  
+  cd /var/www/vhosts/[your-path]/crud-laravel-vue
+
+  php artisan migrate
+
+  php artisan db:seed --class=UsersTableSeeder
+
+  php artisan db:seed --class=ItemsTableSeeder
+
+  ### Create Assets 
+
+  npm run production
