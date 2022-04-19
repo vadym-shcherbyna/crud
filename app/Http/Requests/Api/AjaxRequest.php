@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-
 class AjaxRequest extends FormRequest
 {
     /*
@@ -25,10 +24,6 @@ class AjaxRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator) : HttpResponseException
     {
-        throw new HttpResponseException(
-            response()->json([
-                'errors'  => $validator->errors()],
-                             422)
-        );
+        throw new HttpResponseException(response()->json(['errors'  => $validator->errors()], 422));
     }
 }
