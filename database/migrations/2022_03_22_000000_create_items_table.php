@@ -21,10 +21,9 @@ class CreateItemsTable extends Migration
             $table->string('name', 191)->comment('Name');
             $table->string('slug', 191)->comment('Slug');
             $table->string('address', 191)->comment('Address');
-            $table->string('announce', 191)->comment('Announce');
             $table->text('description')->comment('Description');
-            $table->boolean('is_active')->default(1)->comment('Is Active');
             $table->string('notice', 191)->nullable()->comment('Notice');
+            $table->boolean('is_active')->nullable()->comment('Activity');
             $table->timestamps();
             $table->softDeletes();
         });

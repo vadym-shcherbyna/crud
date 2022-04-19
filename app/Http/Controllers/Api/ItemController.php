@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Api\Interfaces\ItemRepositoryInterface;
 use App\Http\Resources\ItemResource;
 use App\Http\Requests\Api\Items\IndexRequest;
+use App\Http\Requests\Api\Items\StoreRequest;
+use App\Http\Requests\Api\Items\UpdateRequest;
+use App\Models\Item;
 
 class ItemController extends Controller
 {
     /*
-     * @var AbonentRepositoryInterface
+     * @var ItemRepositoryInterface
      */
     private $repository;
 
@@ -36,5 +39,61 @@ class ItemController extends Controller
         $records = $this->repository->index($validated);
 
         return ItemResource::collection($records);
+    }
+
+    /*
+     * Items Store
+     *
+     * @param StoreRequest $request
+     * @return Illuminate\Http\JsonResponse
+     *
+     */
+    public function store(StoreRequest $request) : \Illuminate\Http\JsonResponse
+    {
+        $validated = $request->validated();
+
+        $item = $this->repository->store($validated);
+
+        return response()->json($item);
+    }
+
+    /*
+     * Items Edit
+     *
+     * @param Item $item
+     * @return Illuminate\Http\JsonResponse
+     *
+     */
+    public function edit(Item $item) : \Illuminate\Http\JsonResponse
+    {
+        return response()->json($item);
+    }
+
+    /*
+     * Items Update
+     *
+     * @param UpdateRequest $request
+     * @param Item $item
+     * @return Illuminate\Http\JsonResponse
+     *
+     */
+    public function update(StoreRequest $request, Item $item) : \Illuminate\Http\JsonResponse
+    {
+        $validated = $request->validated();
+
+        $item = $this->repository->update($item, $validated);
+
+        return response()->json($item);
+    }
+
+    /*
+     * Items Destroy
+     *
+     * @param Item $item
+     * @return void
+     */
+    public function destroy(Item $item)
+    {
+        $item->delete();
     }
 }

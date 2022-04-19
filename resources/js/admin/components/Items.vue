@@ -1,10 +1,13 @@
 <template>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
-        <h1 class="h2"><i class="bi bi-telephone me-3"></i> Items</h1>
+        <h1 class="h2"><i class="bi bi-list-check me-3"></i> Items</h1>
 
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#formModal">
+            <button type="button" class="btn btn-sm btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#formModal"
+                    v-on:click="addItem">
                 <i class="bi bi-plus-circle-fill me-2"></i> Add a new item
             </button>
         </div>
@@ -20,9 +23,7 @@
         <div class="col-md-2">
             <select v-model="category" name="category" id="category" class="form-select">
                 <option value="">Categories</option>
-                <option value="1">Category 1</option>
-                <option value="2">Category 2</option>
-                <option value="3">Category 3</option>
+                <option v-for="(item, index) in categories" v-bind:value="index">{{ item }}</option>
             </select>
         </div>
 
@@ -58,30 +59,30 @@
                         <SortDown v-bind:sort_attr="sort_attr" v-bind:sort_dir="sort_dir" current_attr="created_at"></SortDown>
                     </span>
                 </th>
-                <th class="">
+                <th>
                     <span  class="cursor-pointer" v-on:click="sorting('name')">
                         Name
                         <SortUp v-bind:sort_attr="sort_attr" v-bind:sort_dir="sort_dir" current_attr="name"></SortUp>
                         <SortDown v-bind:sort_attr="sort_attr" v-bind:sort_dir="sort_dir" current_attr="name"></SortDown>
                     </span>
                 </th>
-                <th class="">
+                <th>
                     <span  class="cursor-pointer" v-on:click="sorting('category')">
                         Category
                         <SortUp v-bind:sort_attr="sort_attr" v-bind:sort_dir="sort_dir" current_attr="category"></SortUp>
                         <SortDown v-bind:sort_attr="sort_attr" v-bind:sort_dir="sort_dir" current_attr="category"></SortDown>
                     </span>
                 </th>
-                <th class="">
+                <th>
                     <span  class="cursor-pointer" v-on:click="sorting('address')">
                         Address
                         <SortUp v-bind:sort_attr="sort_attr" v-bind:sort_dir="sort_dir" current_attr="address"></SortUp>
                         <SortDown v-bind:sort_attr="sort_attr" v-bind:sort_dir="sort_dir" current_attr="address"></SortDown>
                     </span>
                 </th>
-                <th class="text-center">Active</th>
-                <th class="text-center">Notice</th>
-                <th>&nbsp;</th>
+                <td class="text-center">Activity</td>
+                <td class="text-center">Notice</td>
+                <th colspan="2">&nbsp;</th>
             </tr>
             </thead>
             <tbody>
@@ -91,8 +92,8 @@
                     {{ item.date.date }}
                     <span class="text-muted ms-2">{{ item.date.time }}</span>
                 </td>
-                <td class="">{{ item.name }}</td>
-                <td class="">
+                <td>{{ item.name }}</td>
+                <td>
                     {{ item.category }}
                 </td>
                 <td>{{ item.address }}</td>
@@ -105,7 +106,12 @@
                     <TooltipSlot v-bind:info="item.notice"  v-if="item.notice !== null"></TooltipSlot>
 
                 </td>
-                <td></td>
+                <td><i class="bi bi-pencil-square text-success cursor-pointer"
+                       data-bs-toggle="modal"
+                       data-bs-target="#formModal"
+                       v-on:click="editItem(item.id)"></i></td>
+                <td><i class="bi bi-trash text-danger cursor-pointer"
+                       v-on:click="deleteItem(item.id)"></i></td>
             </tr>
             </tbody>
         </table>
@@ -138,7 +144,7 @@
 
     </div>
 
-    <ModalSlot></ModalSlot>
+    <ModalSlot v-bind:categories="this.categories" v-bind:itemId="this.itemId"></ModalSlot>
 
 </template>
 <script>
@@ -159,6 +165,7 @@ export default {
     // Variables
     data() {
         return {
+            itemId: null,
             endpoint: '/api/items',
             per_page: null,
             page: null,
@@ -166,6 +173,7 @@ export default {
             sort_dir: 'desc',
             items: [],
             meta: [],
+            categories: [],
             name: null,
             address: null,
             category: '',
@@ -175,32 +183,46 @@ export default {
     watch: {
         name: function(val) {
             this.name = val;
-            this.page = null;
+            this.clearCurrentPage();
             this.getItems();
         },
         category: function(val) {
             this.category = val;
-            this.page = null;
+            this.clearCurrentPage();
             this.getItems();
         },
         address: function(val) {
             this.address = val;
-            this.page = null;
+            this.clearCurrentPage();
             this.getItems();
         },
         is_active: function(val) {
             this.is_active = val;
-            this.page = null;
+            this.clearCurrentPage();
             this.getItems();
         },
     },
     created() {
         this.getItems();
+        this.getCategoris();
     },
     mounted() {
         //
     },
     methods: {
+        getCategoris() {
+            //
+            axios.get('/api/categories')
+                .then(response => {
+                    this.categories = response.data.data;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        clearCurrentPage() {
+            this.page = null;
+        },
         getItems() {
             var url = this.endpoint + '?';
 
@@ -273,6 +295,23 @@ export default {
             this.address = null;
             this.category = '';
             this.is_active = '';
+        },
+        addItem() {
+            this.itemId = null;
+        },
+        editItem(id) {
+            this.itemId = id;
+        },
+        deleteItem(id) {
+            if (confirm("Delete the item?")) {
+                axios.delete('/api/items/' + id)
+                    .then(response => {
+                        this.getItems();
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            }
         },
     }
 }
