@@ -51,3 +51,10 @@ Add, edit, delete items. Filters, sorting, pagination and num rows control. Moda
   ### Create Assets 
 
   npm run production
+
+## Demo
+
+    site: http://crud.phphints.com
+    login: admin@admin.com
+    password: admin@admin.com
+    
