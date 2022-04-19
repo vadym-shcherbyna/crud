@@ -5,7 +5,7 @@ return [
     'login' => [
         'title' => 'User Login',
         'H1' => 'User Login',
-        'copyright' => \date('Y'),
+        'year' => \date('Y'),
         'fields' => [
             'email' => [
                 'label' => 'E-mail address',
