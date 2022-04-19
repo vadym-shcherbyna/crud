@@ -15,6 +15,7 @@ Add, eit, delete items. Filters, sorting, pagination and num rows control. Modal
 
 - laravel-mix
 - vue3-popper
+- Sanctum
 
 ## Laravel App Futures
 

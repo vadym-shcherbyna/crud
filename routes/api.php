@@ -16,12 +16,11 @@ use App\Http\Controllers\Api\CategoryController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    /* Items */
+    Route::post('/items/{item}/activity', [ItemController::class, 'activity']);
+    Route::resource('items', ItemController::class)->except(['show']);
+
+    /* Categories */
+    Route::resource('categories', CategoryController::class)->only(['index']);
 });
-
-/* Items */
-Route::post('/items/{item}/activity', [ItemController::class, 'activity']);
-Route::resource('items', ItemController::class)->except(['show']);
-
-Route::resource('categories', CategoryController::class)->only(['index']);
