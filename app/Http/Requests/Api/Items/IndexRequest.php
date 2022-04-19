@@ -2,19 +2,11 @@
 
 namespace App\Http\Requests\Api\Items;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Api\AjaxRequest;
 use App\Models\Item;
 
-class IndexRequest extends FormRequest
+class IndexRequest extends AjaxRequest
 {
-    /*
-     * @return boolean
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     /*
      * @return array
      */

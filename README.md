@@ -2,7 +2,7 @@
 
 CRUD with Laravel API Resource and Vue.
 
-Filters, sorting, pagination and num rows control. Modals and tooltips. 
+Add, edit, delete items. Filters, sorting, pagination and num rows control. Modals and tooltips. 
 
 ## Stack
 
@@ -16,11 +16,13 @@ Filters, sorting, pagination and num rows control. Modals and tooltips.
 
 - laravel-mix
 - vue3-popper
+- Sanctum
 
-## Laravel App
+## Laravel App Futures
 
+- Custom Auth
 - Laravel API Resources
-- Repositories
+- Repository Design Pattern
 - Form Requests Validation
 - Migrations + Seeders
 - Models: SoftDeletes, Factory

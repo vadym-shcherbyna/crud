@@ -64,4 +64,31 @@ class ItemRepository implements ItemRepositoryInterface
 
         return $query->paginate($this->perPage);
     }
+
+    /**
+     * Items Store
+     *
+     * @param array $data
+     *
+     * @return  Item
+     */
+    public function store(array $data) : Item
+    {
+        return Item::create($data);
+    }
+
+    /**
+     * Update Item
+     *
+     * @param Item $item
+     * @param array $data
+     *
+     * @return Item
+     */
+    public function update(Item $item, array $data) : Item
+    {
+        $item->update($data);
+
+        return $item;
+    }
 }

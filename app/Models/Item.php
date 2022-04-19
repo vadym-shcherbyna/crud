@@ -31,14 +31,13 @@ class Item extends Model
      * @var array
      */
     protected $fillable = [
-        'category',
         'name',
-        'address',
         'slug',
-        'announce',
+        'category',
+        'address',
         'description',
-        'is_active',
         'notice',
+        'is_active',
     ];
 
     const CATEGORY_ONE = 1;
