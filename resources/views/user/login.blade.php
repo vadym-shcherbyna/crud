@@ -6,7 +6,7 @@
 
             @csrf
 
-            <img class="mb-1" src="{{ asset('images/logo.svg') }}" alt="" width="172">
+            <img class="mb-1" src="{{ asset('images/logo.svg') }}" alt="" width="72" height="72">
 
             <h1 class="h3 mb-3 fw-normal">@lang($route . '.H1')</h1>
 
@@ -38,9 +38,10 @@
             <button class="w-100 btn btn-lg btn-secondary" type="submit">@lang($route . '.buttons.submit')</button>
 
             <p class="mt-3 mb-3 text-muted">
-                v.2023-03
-                <a href="https://pipl.ua" target="_blank" class="text-secondary">
-                    Pipl.ua</a>
+                v.2022-04
+                <i class="bi bi-git mx-3"></i>
+                <a href="https://gitlab.com/Vadym.Shcherbyna/crud-laravel-vue" target="_blank" class="text-secondary">
+                    GitLab Repo</a>
             </p>
 
         </form>

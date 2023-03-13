@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\ViewController;
+namespace App\Http\Controllers;
 
 class DashboardController extends ViewController
 {

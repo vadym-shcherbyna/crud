@@ -9,8 +9,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link @if($route == 'admin.accounts') active @endif" href="{{ route('admin.accounts.index') }}">
-                    <i class="bi bi-users me-2"></i> @lang('admin.accounts.menu')</a>
+                <a class="nav-link @if($route == 'admin.items.index') active @endif" href="{{ route('admin.items.index') }}">
+                    <i class="bi bi-card-list me-2"></i> @lang('admin.items.menu')</a>
             </li>
 
         </ul>
