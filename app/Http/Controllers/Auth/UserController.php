@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use App\Http\Requests\User\LoginRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use App\Http\Controllers\ViewController;
 
 class UserController extends ViewController
 {
@@ -16,9 +17,9 @@ class UserController extends ViewController
     public function login() : \Illuminate\View\View|\Illuminate\Http\RedirectResponse
     {
         if (Auth::check()) {
-            return redirect()->route('admin.items.index');
+            return redirect()->route('admin.dashboard');
         } else {
-            return $this->view('user.login');
+            return $this->view('auth.login');
         }
     }
 
@@ -35,7 +36,7 @@ class UserController extends ViewController
             //
             $request->session()->regenerate();
 
-            return redirect()->intended(route('admin.items.index'));
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         return back()->withInput()->withErrors(['login' => Lang::get('user.login.error')]);
