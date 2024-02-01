@@ -30,17 +30,25 @@ Add, edit, delete items. Filters, sorting, pagination and num rows control. Moda
 
   ### Copy Repo
 
-  cd /var/www/vhosts/[your-path]
+  cd /var/www/[your-path]
 
-  git clone https://gitlab.com/Vadym.Shcherbyna/crud-laravel-vue -b master
+  git clone https://github.com/vadym-shcherbyna/crud -b master
+
+  ### Vendor
+
+  cd /var/www/[your-path]/crud
+
+  composer update
 
   ### Set Credentials
   
   [edit .env]
 
+  php artisan key:generate
+
   ### Migration + Seeding
   
-  cd /var/www/vhosts/[your-path]/crud-laravel-vue
+  cd /var/www/vhosts/[your-path]/crud 
 
   php artisan migrate
 
@@ -49,6 +57,10 @@ Add, edit, delete items. Filters, sorting, pagination and num rows control. Moda
   php artisan db:seed --class=ItemsTableSeeder
 
   ### Create Assets 
+
+  npm install
+
+  npm i vue@3.2.26
 
   npm run production
 
