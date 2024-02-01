@@ -64,9 +64,9 @@ Add, edit, delete items. Filters, sorting, pagination and num rows control. Moda
 
   npm run production
 
-## Demo
+  ## Demo
 
-    site: http://crud.phphints.com
+    site: http://crud.devhints.net
     login: admin@admin.com
     password: admin@admin.com
     
